@@ -160,7 +160,7 @@ export function toMemberComment(row: any, authorName: unknown, authorIsMember: b
     id: String(row?.id ?? ""),
     body: typeof row?.body === "string" ? row.body : "",
     createdAt: iso(row?.created_at),
-    author: { name: name || "PitchNest member", isBusinessMember: authorIsMember },
+    author: { name: name || "VentureRoom member", isBusinessMember: authorIsMember },
     category: MEMBER_COMMENT_CATEGORIES.includes(row?.category) ? (row.category as string) : null,
     onPitch: Boolean(row?.pitch_id),
   };
