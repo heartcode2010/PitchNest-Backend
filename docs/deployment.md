@@ -4,8 +4,8 @@ Two environments, two branches. Nobody needs the AWS console to ship code.
 
 | Branch | Environment | API (Lambda) | Live-pitch server (Render) | Website (Vercel) | Database (Supabase) |
 |---|---|---|---|---|---|
-| `dev` | **DEV**, for testing | `pitchnest-dev-api` in account `639324724698`, at `https://l5isutzx18.execute-api.eu-west-2.amazonaws.com` | DEV service on branch `dev` | `dev` branch preview: `https://pitchnestapp-git-dev-immanexs-projects.vercel.app` | `ueqwulsbbcvnduhepimh` |
-| `main` | **PROD**, live | `pitchnest-prod-api` alias `live` in account `415081251151`, at `https://mkrkiditq5.execute-api.eu-west-2.amazonaws.com` | PROD service "PitchNest-Backend" on branch `main` | `https://www.pitchnest.app` | `oyztdulmyuklorbudcgb` |
+| `dev` | **DEV**, for testing | `pitchnest-dev-api` in account `639324724698`, at `https://l5isutzx18.execute-api.eu-west-2.amazonaws.com` | DEV service on branch `dev` | `dev` branch preview: `VentureRoom development preview (configure the current Vercel preview URL)` | `ueqwulsbbcvnduhepimh` |
+| `main` | **PROD**, live | `pitchnest-prod-api` alias `live` in account `415081251151`, at `https://mkrkiditq5.execute-api.eu-west-2.amazonaws.com` | PROD VentureRoom API service on branch `main` | `https://ventureroom.vercel.app` | `oyztdulmyuklorbudcgb` |
 
 ## Day to day
 1. Branch from `dev`, open a pull request into `dev`, merge. DEV updates by itself: API, live-pitch server and website.
