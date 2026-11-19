@@ -43,7 +43,7 @@ function iso(value: unknown): string {
 
 function authorName(value: unknown): string {
   const name = typeof value === "string" ? value.trim().slice(0, 80) : "";
-  return name || "PitchNest member";
+  return name || "VentureRoom member";
 }
 
 function rows(data: unknown): any[] {
