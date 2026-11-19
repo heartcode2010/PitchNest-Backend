@@ -552,7 +552,7 @@ export function shareCardFile(bannerFile: string): string {
 // Cards for posters that ship with the website (VentureRoom-Frontend/public),
 // shown until staff upload a poster. Mirrors challengePosterUrl there.
 const BUNDLED_SHARE_CARDS: Record<string, string> = {
-  "pitchnest-challenge": "/pitchnest-challenge-share.jpg",
+  "ventureroom-challenge": "/ventureroom-challenge-share.jpg",
 };
 
 /** The link-preview image for a challenge: its uploaded poster's card, the bundled one, or null. */
