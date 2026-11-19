@@ -32,7 +32,7 @@ export function safeAvatarUrl(value: unknown): string | null {
  *
  * Two eras of stored values must both work (Item A privacy migration):
  *  - Legacy rows: a full public URL like
- *    "https://<proj>.supabase.co/storage/v1/object/public/pitchnest-media/decks/123_x.pdf"
+ *    "https://<project>.supabase.co/storage/v1/object/public/<configured-media-bucket>/decks/123_x.pdf"
  *    → extract everything after "/<bucket>/".
  *  - New / already-bare values: "decks/123_x.pdf" → returned as-is.
  *
