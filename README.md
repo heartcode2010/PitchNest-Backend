@@ -1,11 +1,11 @@
 <p align="center">
-  <img src="logo.svg" alt="PitchNest Logo" width="100" />
+  <img src="logo.svg" alt="VentureRoom Logo" width="100" />
 </p>
 
-<h1 align="center">PitchNest Backend</h1>
+<h1 align="center">VentureRoom Backend</h1>
 
 <p align="center">
-  <strong>The AI Brain, Real-Time WebSocket Bridge, and API Engine for PitchNest</strong>
+  <strong>The secure AI, real-time voice and application services behind VentureRoom</strong>
 </p>
 
 <p align="center">
@@ -22,7 +22,7 @@
 
 ## 🧠 Overview
 
-**PitchNest Backend** powers the intelligent core of PitchNest. It bridges real-time human voice input with multimodal artificial intelligence, orchestrating high-stakes venture capital pitch simulations with sub-second voice latency:
+**VentureRoom Backend** powers the secure application services, AI investor simulations, real-time voice sessions and founder data behind VentureRoom. It works with the VentureRoom web application as one founder-readiness platform.
 
 * **Audio Streaming Bridge**: Streams microphone PCM audio chunks over WebSockets to **Azure Speech SDK** for real-time transcription.
 * **Persona Intelligence Engine**: Dispatches transcripts to **Azure OpenAI / OpenAI** with customized personas (Marcus, Sarah, Chen, Riley) featuring conversational interjections and interruption handling.
@@ -104,7 +104,7 @@ PitchNest-Backend/
 
 ```bash
 # Clone the repository
-git clone https://github.com/PitchNest-Lab/PitchNest-Backend.git
+git clone https://github.com/heartcode2010/PitchNest-Backend.git
 cd PitchNest-Backend
 
 # Install dependencies
@@ -141,7 +141,7 @@ AZURE_OPENAI_API_KEY=your-azure-key
 
 # Transactional Email (Resend)
 RESEND_API_KEY=re_your_api_key
-EMAIL_FROM=PitchNest <hello@pitchnest.app>
+EMAIL_FROM=VentureRoom <hello@pitchnest.app>
 
 # Billing (Flutterwave)
 FLW_SECRET_KEY=FLWSECK-your-key
@@ -173,7 +173,7 @@ npm test
 
 ## 🌐 Production Deployment (Render)
 
-1. Connect the `PitchNest-Backend` repository to a **Render Web Service**.
+1. Connect the `VentureRoom-Backend` repository to a **Render Web Service**.
 2. **Settings**:
    * **Root Directory:** *(leave blank / empty)*
    * **Build Command:** `npm install`
@@ -186,10 +186,14 @@ npm test
 
 | Repository | Description |
 | :--- | :--- |
-| **[PitchNest-Frontend](https://github.com/PitchNest-Lab/PitchNest-Frontend)** | React 19 + Vite 6 web single-page application |
+| **[VentureRoom-Frontend](https://github.com/heartcode2010/PitchNest-Frontend)** | React 19 + Vite 6 web single-page application |
 | **[PitchNest-Mobile](https://github.com/PitchNest-Lab/PitchNest-Mobile)** | Native iOS & Android companion mobile app (React Native / Expo) |
 
 ---
+
+## 🏢 Product & stewardship
+
+VentureRoom is built by **Heartcode Technologies**. The web application and this API are maintained as coordinated parts of one product.
 
 ## 📄 License
 

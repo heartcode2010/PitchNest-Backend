@@ -94,7 +94,7 @@ export const config = {
   // ANY origin with credentials:true on the live site. Local dev sets
   // NODE_ENV=development explicitly in .env / npm scripts.
   nodeEnv: process.env.NODE_ENV || "production",
-  emailFrom: process.env.EMAIL_FROM || "PitchNest <hello@pitchnest.app>",
+  emailFrom: process.env.EMAIL_FROM || "VentureRoom <hello@pitchnest.app>",
   // Where user REPLIES go. This is deliberately a different address from
   // emailFrom: Resend will only send from a domain we have verified by DNS, and
   // gmail.com can never be verified (it returns 403 "domain is not verified"),

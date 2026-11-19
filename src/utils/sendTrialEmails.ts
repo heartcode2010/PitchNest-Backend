@@ -72,18 +72,18 @@ function escapeHtml(value: string): string {
 function timePhrase(daysRemaining: number): { subject: string; headline: string } {
   if (daysRemaining <= 0) {
     return {
-      subject: "Your PitchNest trial has ended",
+      subject: "Your VentureRoom trial has ended",
       headline: "Your trial has ended",
     };
   }
   if (daysRemaining === 1) {
     return {
-      subject: "Your PitchNest trial ends tomorrow",
+      subject: "Your VentureRoom trial ends tomorrow",
       headline: "A day left of full access",
     };
   }
   return {
-    subject: `${daysRemaining} days left on your PitchNest trial`,
+    subject: `${daysRemaining} days left on your VentureRoom trial`,
     headline: `${daysRemaining} days left of full access`,
   };
 }
@@ -135,8 +135,8 @@ function opener(input: TrialEmailInput): string {
  */
 function footer(milestone: TrialMilestone): string {
   return milestone === "expired"
-    ? "You're receiving this because you have a PitchNest account. This is the last trial email. You can change trial email preferences in Settings."
-    : "You're receiving this because you have a PitchNest account. You can turn off trial emails in Settings → Notifications.";
+    ? "You're receiving this because you have a VentureRoom account. This is the last trial email. You can change trial email preferences in Settings."
+    : "You're receiving this because you have a VentureRoom account. You can turn off trial emails in Settings → Notifications.";
 }
 
 export async function sendTrialEmail(input: TrialEmailInput): Promise<void> {

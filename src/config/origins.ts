@@ -10,6 +10,9 @@ export function allowedBrowserOrigins(): Set<string> {
   const origins = new Set(
     [
       config.allowedOrigin,
+      // Stable public VentureRoom deployment. Keep this exact origin only;
+      // arbitrary Vercel preview hosts must still be opted in explicitly.
+      "https://ventureroom.vercel.app",
       ...config.corsExtraOrigins,
       ...(config.nodeEnv === "production"
         ? []
