@@ -174,7 +174,7 @@ const tokenA = signUserToken(FOUNDER_A);
 const tokenB = signUserToken(FOUNDER_B);
 const tokenC = signUserToken(FOUNDER_C);
 const tokenStaff = signUserToken(STAFF);
-const SLUG = "/api/challenges/pitchnest-challenge";
+const SLUG = "/api/challenges/ventureroom-challenge";
 
 before(async () => {
   globalThis.fetch = (async (input: any, init?: any) => {
@@ -211,10 +211,10 @@ before(async () => {
   db.seed("discount_redemptions", []);
   const rules = {
     organizer: "VentureRoom", description: "Practice with AI investors.\n\nSecond paragraph.", region: "Online · open to founders everywhere",
-    banner_file: null, promo_enabled: true, website_url: "https://www.pitchnest.app", prize_currency: "NGN",
+    banner_file: null, promo_enabled: true, website_url: "https://ventureroom.vercel.app", prize_currency: "NGN",
     winners_announced_on: iso(20).slice(0, 10), eligibility: "Founders.", requirements: "", judging_criteria: "60/40.",
     terms: "Terms.", pitch_weight: 60, eligible_session_modes: ["solo", "panel"], min_completed_sessions: 1, required_plan: "prep",
-    social_handles: { instagram: { handle: "@pitchnestapp", url: "https://instagram.com/pitchnestapp" } },
+    social_handles: { instagram: { handle: "@ventureroom", url: "https://instagram.com/ventureroom" } },
     discount_code_id: CODE_ID, confirmations: {}, results_published_at: null, created_at: iso(-5), updated_at: iso(-1),
   };
   db.seed("challenges", [
@@ -267,7 +267,7 @@ const entryOf = (userId: number) => db.rows("challenge_participants").find((p) =
 
 test("public: a draft is a 404; a listed challenge shows its rules and nothing private", async () => {
   assert.equal((await call(base, "GET", "/api/public/challenges/secret-draft")).status, 404);
-  const r = await call(base, "GET", "/api/public/challenges/pitchnest-challenge");
+  const r = await call(base, "GET", "/api/public/challenges/ventureroom-challenge");
   assert.equal(r.status, 200);
   assert.equal(r.json.data.phase, "open");
   assert.equal(r.json.data.prizePool, 160000);
@@ -280,7 +280,7 @@ test("public: a draft is a 404; a listed challenge shows its rules and nothing p
 });
 
 test("link previews: a shared challenge shows its title, tagline and poster; a draft shows nothing", async () => {
-  const r = await fetch(`${base}/api/public/challenges/pitchnest-challenge/share-html`);
+  const r = await fetch(`${base}/api/public/challenges/ventureroom-challenge/share-html`);
   assert.equal(r.status, 200);
   assert.match(r.headers.get("content-type") || "", /^text\/html/);
   const html = await r.text();
@@ -288,7 +288,7 @@ test("link previews: a shared challenge shows its title, tagline and poster; a d
   assert.match(html, /<meta property="og:description" content="Practice\. Pitch\. Showcase\. Win! Practice with AI investors\. Second paragraph\." \/>/);
   assert.match(html, /<meta property="og:image" content="https?:\/\/[^"]+\/ventureroom-challenge-share\.jpg" \/>/, "before an upload, the card that ships with the website");
   assert.match(html, /<meta name="twitter:card" content="summary_large_image" \/>/);
-  assert.match(html, /<link rel="canonical" href="https?:\/\/[^"]+\/opportunities\/challenges\/pitchnest-challenge" \/>/);
+  assert.match(html, /<link rel="canonical" href="https?:\/\/[^"]+\/opportunities\/challenges\/ventureroom-challenge" \/>/);
   assert.match(html, /<meta name="robots" content="index, follow" \/>/);
 
   const draft = await fetch(`${base}/api/public/challenges/secret-draft/share-html`);
@@ -307,7 +307,7 @@ test("hub: the hosted challenge comes first; external listings are unchanged", a
   assert.equal(r.json.data[0].source, "ventureroom");
   assert.equal(r.json.data[0].kind, "competition");
   assert.equal(r.json.data[0].challenge.slug, "ventureroom-challenge");
-  assert.match(r.json.data[0].sourceUrl, /\/opportunities\/challenges\/pitchnest-challenge$/);
+  assert.match(r.json.data[0].sourceUrl, /\/opportunities\/challenges\/ventureroom-challenge$/);
   assert.equal(r.json.data.some((item: any) => item.title === "Secret Draft Challenge"), false, "drafts never list");
   const external = r.json.data.find((item: any) => item.id === "e1");
   assert.equal(external.source, "external");
@@ -370,7 +370,7 @@ test("only an owned, published, real and complete business can be entered", asyn
 test("the social link must be a real post on the chosen platform", async () => {
   const patch = (body: Row) => call(base, "PATCH", `${SLUG}/entry`, { token: tokenA, body });
   assert.equal((await patch({ socialPlatform: "instagram", socialPostUrl: "https://x.com/a/status/1855012345678901234" })).status, 422);
-  assert.equal((await patch({ socialPlatform: "instagram", socialPostUrl: "https://www.instagram.com/pitchnestapp/" })).status, 422);
+  assert.equal((await patch({ socialPlatform: "instagram", socialPostUrl: "https://www.instagram.com/ventureroom/" })).status, 422);
   assert.equal((await patch({ socialPlatform: "myspace", socialPostUrl: "https://myspace.com/p/1" })).status, 400);
   const ok = await patch({ socialPlatform: "instagram", socialPostUrl: "https://www.instagram.com/p/C1a2B3c4D5e/", profileLinkConfirmed: true });
   assert.equal(ok.status, 200, JSON.stringify(ok.json));
@@ -467,11 +467,11 @@ test("review: reasons are required, founders are told, and every decision is aud
   const ada = entryOf(FOUNDER_A.id)!;
   const review = (id: string, body: Row) => call(base, "POST", `/api/staff/challenges/${CHALLENGE_ID}/participants/${id}/review`, { token: tokenStaff, body });
   assert.equal((await review(ada.id, { action: "request_correction" })).status, 400, "a correction needs a reason");
-  let r = await review(ada.id, { action: "request_correction", note: "Tag @pitchnestapp in the caption." });
+  let r = await review(ada.id, { action: "request_correction", note: "Tag @ventureroom in the caption." });
   assert.equal(r.status, 200);
   assert.equal(notes(FOUNDER_A.id, "challenge_correction").length, 1);
   const mine = await call(base, "GET", `${SLUG}/entry`, { token: tokenA });
-  assert.equal(mine.json.data.reviewNote, "Tag @pitchnestapp in the caption.");
+  assert.equal(mine.json.data.reviewNote, "Tag @ventureroom in the caption.");
   assert.equal(mine.json.data.editable, true);
   // The founder fixes the post and resubmits.
   await call(base, "PATCH", `${SLUG}/entry`, { token: tokenA, body: { socialPostUrl: "https://www.instagram.com/p/C9fixed123/" } });
@@ -530,7 +530,7 @@ test("winners: approved entries only, one place each; results publish once every
   r = await publish();
   assert.equal(r.status, 200, JSON.stringify(r.json));
   assert.equal(notes(FOUNDER_B.id, "challenge_results").length, 1, "every participant hears the results");
-  const page = await call(base, "GET", "/api/public/challenges/pitchnest-challenge");
+  const page = await call(base, "GET", "/api/public/challenges/ventureroom-challenge");
   assert.deepEqual(page.json.data.results, [
     { place: 1, prize: 100000, businessName: "Acme", businessSlug: "acme", founderName: null },
     { place: 2, prize: 60000, businessName: "Chi Foods", businessSlug: "chi-foods", founderName: "Chi Founder" },
@@ -560,7 +560,7 @@ test("images: the poster is public, the founder's screenshot is private", async 
   assert.equal(card.contentType, "image/jpeg");
   const cardMeta = await sharp(card.body as Buffer).metadata();
   assert.deepEqual([cardMeta.format, cardMeta.width, cardMeta.height], ["jpeg", 1200, 630]);
-  const preview = await (await fetch(`${base}/api/public/challenges/pitchnest-challenge/share-html`)).text();
+  const preview = await (await fetch(`${base}/api/public/challenges/ventureroom-challenge/share-html`)).text();
   assert.ok(preview.includes(`<meta property="og:image" content="https://public.test/${config.publicMediaBucket}/${card.paths[0]}" />`), preview);
   const hub = await call(base, "GET", "/api/public/opportunities");
   assert.equal(hub.json.data[0].challenge.imageUrl, poster.json.data.imageUrl, "the hub card shows the poster");
@@ -590,7 +590,7 @@ test("images: the poster is public, the founder's screenshot is private", async 
   db.storageCalls.length = 0;
   assert.equal((await call(base, "DELETE", `/api/staff/challenges/${CHALLENGE_ID}/image`, { token: tokenStaff })).status, 200);
   assert.deepEqual(db.storageCalls.find((c) => c.op === "remove")?.paths, current);
-  const bundled = await (await fetch(`${base}/api/public/challenges/pitchnest-challenge/share-html`)).text();
+  const bundled = await (await fetch(`${base}/api/public/challenges/ventureroom-challenge/share-html`)).text();
   assert.match(bundled, /\/ventureroom-challenge-share\.jpg" \/>/, "without an upload, previews fall back to the bundled card");
 });
 
