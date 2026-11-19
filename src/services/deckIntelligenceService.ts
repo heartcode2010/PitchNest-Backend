@@ -1,6 +1,6 @@
 /**
  * DeckIntelligenceService — Slide parsing, structured slide representation,
- * and semantic slide-to-speech mapping for PitchNest.
+ * and semantic slide-to-speech mapping for VentureRoom.
  *
  * Allows founders to pitch naturally without reading slides, while the AI
  * maps speech to the relevant slide and detects updates vs contradictions.
