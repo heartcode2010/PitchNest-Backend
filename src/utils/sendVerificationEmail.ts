@@ -71,7 +71,7 @@ export async function sendVerificationEmail(userId: string | number, email: stri
         from: config.emailFrom,
         replyTo: config.emailReplyTo,
         to: email,
-        subject: "Verify your PitchNest account",
+        subject: "Verify your VentureRoom account",
         html: `
         <div style="font-family:sans-serif;max-width:480px;margin:auto;padding:32px;border:1px solid #e5e7eb;border-radius:16px;background:#fff">
           <h2 style="color:#111827;font-size:24px;margin-bottom:8px">Verify your email</h2>
