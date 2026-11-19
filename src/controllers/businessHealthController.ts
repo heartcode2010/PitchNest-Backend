@@ -132,7 +132,7 @@ export function diagnoseBusinessHealth(rows: Array<Record<string, any>>) {
     nextActions.push("Contact recently lost customers, categorise their reasons for leaving and fix the most common preventable cause.");
   }
   const previous = history.at(-2);
-  if (previous && Number(previous.revenue) > 0 && revenue < Number(previous.revenue) * 0.85) {
+  if (previous && String(previous.currency || "USD").trim() === String(latest.currency || "USD").trim() && Number(previous.revenue) > 0 && revenue < Number(previous.revenue) * 0.85) {
     const decline = (1 - revenue / Number(previous.revenue)) * 100;
     issues.push({ severity: "warning", title: "Revenue has dropped materially", detail: `Revenue is down ${decline.toFixed(1)}% compared with the previous recorded month.` });
     nextActions.push("Break revenue down by product, customer and channel to locate the source of the decline before changing the whole sales strategy.");
