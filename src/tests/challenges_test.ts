@@ -333,9 +333,9 @@ const hostile = renderChallengeShareDocument(
 assert.doesNotMatch(hostile, /<script>|<b>/, "staff text is escaped");
 assert.match(hostile, /<meta property="og:title" content="&quot;&gt;&lt;script&gt;alert\(1\)&lt;\/script&gt;" \/>/);
 assert.match(hostile, /<meta property="og:image" content="https:\/\/cdn\.example\/card\.jpg\?a=1&amp;b=2" \/>/);
-assert.match(hostile, /<meta property="og:url" content="https:\/\/www\.pitchnest\.app\/opportunities\/challenges\/demo" \/>/);
+assert.match(hostile, /<meta property="og:url" content="https:\/\/ventureroom\.vercel\.app\/opportunities\/challenges\/demo" \/>/);
 const missing = renderChallengeShareDocument(null, "https://ventureroom.vercel.app", "unavailable");
-assert.match(missing, /<meta property="og:image" content="https:\/\/www\.pitchnest\.app\/og-image\.png" \/>/, "the site image when there is nothing to show");
+assert.match(missing, /<meta property="og:image" content="https:\/\/ventureroom\.vercel\.app\/og-image\.png" \/>/, "the site image when there is nothing to show");
 assert.match(missing, /<title>Challenge not found — VentureRoom<\/title>/);
 
 console.log("Challenge tests passed.");
