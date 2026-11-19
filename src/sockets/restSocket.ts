@@ -136,31 +136,31 @@ const WRAP_UP_HARD_SEC = 20;
 // "Welcome to VentureRoom. A fresh one is picked at random each
 // session so the opening never feels canned. {b} is the business name.
 const PANEL_GREETINGS = [
-  "Welcome to the Nest — whenever you're ready, walk us through {b}.",
-  "Great to have you in the Nest. Take a breath, then kick off your pitch for {b} whenever you're set.",
-  "Welcome to the Nest — the panel's listening, so start your pitch for {b} whenever you'd like.",
-  "You've made it to the Nest. Let's hear what {b} is all about whenever you're ready.",
-  "Welcome to the Nest — the floor is yours; introduce {b} whenever you're ready.",
-  "Glad you're here in the Nest. Start your pitch for {b} whenever you feel ready.",
+  "Welcome to VentureRoom. Whenever you're ready, walk us through {b}.",
+  "Welcome to VentureRoom. Take a breath, then begin your pitch for {b} whenever you're ready.",
+  "The VentureRoom panel is listening. Start your pitch for {b} whenever you'd like.",
+  "You're in VentureRoom. Let's hear what {b} is all about whenever you're ready.",
+  "Welcome to VentureRoom. The floor is yours; introduce {b} whenever you're ready.",
+  "Glad you're here in VentureRoom. Start your pitch for {b} whenever you feel ready.",
 ];
 const COACH_GREETINGS = [
-  "Welcome to the Nest — I'm Riley. Let's sharpen your pitch for {b} whenever you're ready.",
-  "Great to have you in the Nest. Take your time, then walk me through {b}.",
-  "Welcome to the Nest — whenever you're set, start your pitch for {b} and I'll coach you through it.",
-  "You're in the Nest now. Let's make {b} shine — begin whenever you're ready.",
-  "Welcome to the Nest — I'm Riley, your coach. Kick off {b} whenever you're ready.",
+  "Welcome to VentureRoom. I'm Riley. Let's sharpen your pitch for {b} whenever you're ready.",
+  "Great to have you in VentureRoom. Take your time, then walk me through {b}.",
+  "Welcome to VentureRoom. Start your pitch for {b} whenever you're set, and I'll coach you through it.",
+  "You're in VentureRoom. Let's make {b} shine — begin whenever you're ready.",
+  "Welcome to VentureRoom. I'm Riley, your coach. Kick off {b} whenever you're ready.",
 ];
 
 // Re-pitch greetings: the founder has pitched {b} to us before and chose
 // "Pitch Again", so the panel acknowledges the return instead of a cold open.
 const PANEL_GREETINGS_RETURN = [
-  "Welcome back to the Nest — we remember {b}. Show us what's changed since last time.",
+  "Welcome back to VentureRoom. We remember {b}; show us what's changed since last time.",
   "Good to see you again. The panel remembers your last pitch for {b} — let's see how it's evolved.",
   "Welcome back — {b} left us with questions last time. The floor is yours whenever you're ready.",
-  "Back in the Nest. We've kept our notes on {b}, so pick it up whenever you're ready.",
+  "Welcome back to VentureRoom. We've kept our notes on {b}, so pick it up whenever you're ready.",
 ];
 const COACH_GREETINGS_RETURN = [
-  "Welcome back to the Nest — I'm glad you returned. Let's pick up where we left off with {b}.",
+  "Welcome back to VentureRoom. I'm glad you returned. Let's pick up where we left off with {b}.",
   "Good to have you back. I remember our last session on {b} — show me what you've improved.",
   "Welcome back — I've still got my notes on {b}. Start whenever you're ready and we'll build on last time.",
 ];
@@ -1385,7 +1385,7 @@ export function initRestSocket(wss: WebSocketServer) {
           }
         }
 
-        // Greeting: speak a varied, code-chosen "Welcome to the Nest" line
+        // Greeting: speak a varied, code-chosen VentureRoom welcome line
         // directly (no LLM call) so the opening is consistent on brand, varied
         // each session, and instant. It still flows through the normal
         // sentence/TTS pipeline via singleChunkStream.
