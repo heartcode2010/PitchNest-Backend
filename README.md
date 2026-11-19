@@ -104,8 +104,8 @@ VentureRoom-Backend/
 
 ```bash
 # Clone the repository
-git clone https://github.com/VentureRoom-Lab/VentureRoom-Backend.git
-cd VentureRoom-Backend
+git clone https://github.com/heartcode2010/PitchNest-Backend.git
+cd PitchNest-Backend
 
 # Install dependencies
 npm install
@@ -141,7 +141,7 @@ AZURE_OPENAI_API_KEY=your-azure-key
 
 # Transactional Email (Resend)
 RESEND_API_KEY=re_your_api_key
-EMAIL_FROM=VentureRoom <hello@ventureroom.app>
+EMAIL_FROM=PitchNest <hello@pitchnest.app>
 
 # Billing (Flutterwave)
 FLW_SECRET_KEY=FLWSECK-your-key
@@ -186,8 +186,8 @@ npm test
 
 | Repository | Description |
 | :--- | :--- |
-| **[VentureRoom-Frontend](https://github.com/VentureRoom-Lab/VentureRoom-Frontend)** | React 19 + Vite 6 web single-page application |
-| **[VentureRoom-Mobile](https://github.com/VentureRoom-Lab/VentureRoom-Mobile)** | Native iOS & Android companion mobile app (React Native / Expo) |
+| **[VentureRoom-Frontend](https://github.com/heartcode2010/PitchNest-Frontend)** | React 19 + Vite 6 web single-page application |
+| **[PitchNest-Mobile](https://github.com/PitchNest-Lab/PitchNest-Mobile)** | Native iOS & Android companion mobile app (React Native / Expo) |
 
 ---
 
