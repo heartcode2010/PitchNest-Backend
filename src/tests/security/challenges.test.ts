@@ -218,7 +218,7 @@ before(async () => {
     discount_code_id: CODE_ID, confirmations: {}, results_published_at: null, created_at: iso(-5), updated_at: iso(-1),
   };
   db.seed("challenges", [
-    { ...rules, id: CHALLENGE_ID, slug: "pitchnest-challenge", title: "VentureRoom Challenge", tagline: "Practice. Pitch. Showcase. Win!",
+    { ...rules, id: CHALLENGE_ID, slug: "ventureroom-challenge", title: "VentureRoom Challenge", tagline: "Practice. Pitch. Showcase. Win!",
       prizes: [{ place: 1, amount: 100000 }, { place: 2, amount: 60000 }], starts_at: iso(-3), submission_deadline: iso(10), status: "open" },
     { ...rules, id: DRAFT_ID, slug: "secret-draft", title: "Secret Draft Challenge", tagline: "Not announced yet at all.",
       prizes: [{ place: 1, amount: 5000 }], starts_at: iso(1), submission_deadline: iso(30), status: "draft" },
@@ -286,7 +286,7 @@ test("link previews: a shared challenge shows its title, tagline and poster; a d
   const html = await r.text();
   assert.match(html, /<meta property="og:title" content="VentureRoom Challenge" \/>/);
   assert.match(html, /<meta property="og:description" content="Practice\. Pitch\. Showcase\. Win! Practice with AI investors\. Second paragraph\." \/>/);
-  assert.match(html, /<meta property="og:image" content="https?:\/\/[^"]+\/pitchnest-challenge-share\.jpg" \/>/, "before an upload, the card that ships with the website");
+  assert.match(html, /<meta property="og:image" content="https?:\/\/[^"]+\/ventureroom-challenge-share\.jpg" \/>/, "before an upload, the card that ships with the website");
   assert.match(html, /<meta name="twitter:card" content="summary_large_image" \/>/);
   assert.match(html, /<link rel="canonical" href="https?:\/\/[^"]+\/opportunities\/challenges\/pitchnest-challenge" \/>/);
   assert.match(html, /<meta name="robots" content="index, follow" \/>/);
@@ -304,23 +304,23 @@ test("link previews: a shared challenge shows its title, tagline and poster; a d
 test("hub: the hosted challenge comes first; external listings are unchanged", async () => {
   const r = await call(base, "GET", "/api/public/opportunities");
   assert.equal(r.status, 200);
-  assert.equal(r.json.data[0].source, "pitchnest");
+  assert.equal(r.json.data[0].source, "ventureroom");
   assert.equal(r.json.data[0].kind, "competition");
-  assert.equal(r.json.data[0].challenge.slug, "pitchnest-challenge");
+  assert.equal(r.json.data[0].challenge.slug, "ventureroom-challenge");
   assert.match(r.json.data[0].sourceUrl, /\/opportunities\/challenges\/pitchnest-challenge$/);
   assert.equal(r.json.data.some((item: any) => item.title === "Secret Draft Challenge"), false, "drafts never list");
   const external = r.json.data.find((item: any) => item.id === "e1");
   assert.equal(external.source, "external");
   assert.equal(external.sourceUrl, "https://example.org/apply", "external links still go to the organizer");
   const grants = await call(base, "GET", "/api/public/opportunities?kind=grant");
-  assert.equal(grants.json.data.some((item: any) => item.source === "pitchnest"), false, "a hosted challenge is a pitch competition");
+  assert.equal(grants.json.data.some((item: any) => item.source === "ventureroom"), false, "a hosted challenge is a pitch competition");
   const competitions = await call(base, "GET", "/api/public/opportunities?kind=competition");
-  assert.equal(competitions.json.data[0].source, "pitchnest");
+  assert.equal(competitions.json.data[0].source, "ventureroom");
 });
 
 test("pop-up: the open challenge, until staff switch it off", async () => {
   const r = await call(base, "GET", "/api/public/challenges/promo");
-  assert.equal(r.json.data.slug, "pitchnest-challenge");
+  assert.equal(r.json.data.slug, "ventureroom-challenge");
   assert.equal(r.json.data.phase, "open");
   db.rows("challenges")[0].promo_enabled = false;
   assert.equal((await call(base, "GET", "/api/public/challenges/promo")).json.data, null);
@@ -591,7 +591,7 @@ test("images: the poster is public, the founder's screenshot is private", async 
   assert.equal((await call(base, "DELETE", `/api/staff/challenges/${CHALLENGE_ID}/image`, { token: tokenStaff })).status, 200);
   assert.deepEqual(db.storageCalls.find((c) => c.op === "remove")?.paths, current);
   const bundled = await (await fetch(`${base}/api/public/challenges/pitchnest-challenge/share-html`)).text();
-  assert.match(bundled, /\/pitchnest-challenge-share\.jpg" \/>/, "without an upload, previews fall back to the bundled card");
+  assert.match(bundled, /\/ventureroom-challenge-share\.jpg" \/>/, "without an upload, previews fall back to the bundled card");
 });
 
 test("discount: the preview and the checkout charge the same discounted, one-time price", async () => {
