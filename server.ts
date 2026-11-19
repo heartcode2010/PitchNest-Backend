@@ -71,7 +71,7 @@ startTrialLifecycleJob();
 
 // Boot server on 0.0.0.0 to enable access inside local Docker/IPv4 routers if needed
 server.listen(config.port, "0.0.0.0", async () => {
-  console.log(`\n🚀 PITCHNEST BRAIN IS ONLINE (MODULAR HIGH-PERFORMANCE PROD STANDARD)`);
+  console.log(`\n🚀 VENTUREROOM API IS ONLINE (MODULAR HIGH-PERFORMANCE PROD STANDARD)`);
   console.log(`📡 Listening on PORT ${config.port}\n`);
   
   await checkApiKeyStatus();
