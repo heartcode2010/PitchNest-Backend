@@ -28,7 +28,7 @@ const wss = new WebSocketServer({
   // Keep the JWT out of the URL: the browser offers it as another protocol,
   // while the server echoes only this fixed application protocol.
   handleProtocols: (protocols) =>
-    protocols.has("pitchnest-v1") ? "pitchnest-v1" : false,
+    protocols.has("ventureroom-v1") ? "ventureroom-v1" : false,
   verifyClient: ({ origin }, done) => {
     if (isDraining) return done(false, 503, "Service is restarting");
 
