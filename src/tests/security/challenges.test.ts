@@ -210,7 +210,7 @@ before(async () => {
   }]);
   db.seed("discount_redemptions", []);
   const rules = {
-    organizer: "PitchNest", description: "Practice with AI investors.\n\nSecond paragraph.", region: "Online · open to founders everywhere",
+    organizer: "VentureRoom", description: "Practice with AI investors.\n\nSecond paragraph.", region: "Online · open to founders everywhere",
     banner_file: null, promo_enabled: true, website_url: "https://www.pitchnest.app", prize_currency: "NGN",
     winners_announced_on: iso(20).slice(0, 10), eligibility: "Founders.", requirements: "", judging_criteria: "60/40.",
     terms: "Terms.", pitch_weight: 60, eligible_session_modes: ["solo", "panel"], min_completed_sessions: 1, required_plan: "prep",
@@ -218,7 +218,7 @@ before(async () => {
     discount_code_id: CODE_ID, confirmations: {}, results_published_at: null, created_at: iso(-5), updated_at: iso(-1),
   };
   db.seed("challenges", [
-    { ...rules, id: CHALLENGE_ID, slug: "pitchnest-challenge", title: "PitchNest Challenge", tagline: "Practice. Pitch. Showcase. Win!",
+    { ...rules, id: CHALLENGE_ID, slug: "pitchnest-challenge", title: "VentureRoom Challenge", tagline: "Practice. Pitch. Showcase. Win!",
       prizes: [{ place: 1, amount: 100000 }, { place: 2, amount: 60000 }], starts_at: iso(-3), submission_deadline: iso(10), status: "open" },
     { ...rules, id: DRAFT_ID, slug: "secret-draft", title: "Secret Draft Challenge", tagline: "Not announced yet at all.",
       prizes: [{ place: 1, amount: 5000 }], starts_at: iso(1), submission_deadline: iso(30), status: "draft" },
@@ -284,7 +284,7 @@ test("link previews: a shared challenge shows its title, tagline and poster; a d
   assert.equal(r.status, 200);
   assert.match(r.headers.get("content-type") || "", /^text\/html/);
   const html = await r.text();
-  assert.match(html, /<meta property="og:title" content="PitchNest Challenge" \/>/);
+  assert.match(html, /<meta property="og:title" content="VentureRoom Challenge" \/>/);
   assert.match(html, /<meta property="og:description" content="Practice\. Pitch\. Showcase\. Win! Practice with AI investors\. Second paragraph\." \/>/);
   assert.match(html, /<meta property="og:image" content="https?:\/\/[^"]+\/pitchnest-challenge-share\.jpg" \/>/, "before an upload, the card that ships with the website");
   assert.match(html, /<meta name="twitter:card" content="summary_large_image" \/>/);
