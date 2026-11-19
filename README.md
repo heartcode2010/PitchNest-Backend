@@ -142,6 +142,7 @@ AZURE_OPENAI_API_KEY=your-azure-key
 # Transactional Email (Resend)
 RESEND_API_KEY=re_your_api_key
 EMAIL_FROM=VentureRoom <onboarding@resend.dev>
+EMAIL_REPLY_TO=ventureroom@gmail.com
 
 # Billing (Flutterwave)
 FLW_SECRET_KEY=FLWSECK-your-key
