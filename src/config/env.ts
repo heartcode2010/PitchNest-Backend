@@ -63,7 +63,7 @@ export const config = {
   supabaseServiceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY || "",
   port: process.env.PORT ? parseInt(process.env.PORT, 10) : 3000,
   isGoogleCloud: !!process.env.K_SERVICE,
-  jwtSecret: process.env.JWT_SECRET || "pitchnest-dev-secret-change-in-production",
+  jwtSecret: process.env.JWT_SECRET || "ventureroom-dev-secret-change-in-production",
   allowedOrigin: (process.env.ALLOWED_ORIGIN || "").trim() || "http://localhost:5174",
   azureSpeechKey: process.env.AZURE_SPEECH_KEY || "",
   azureSpeechRegion: process.env.AZURE_SPEECH_REGION || "",
@@ -99,7 +99,7 @@ export const config = {
   // emailFrom: Resend will only send from a domain we have verified by DNS, and
   // gmail.com can never be verified (it returns 403 "domain is not verified"),
   // so a Gmail address cannot be the sender. Reply-To is the supported way to
-  // route replies into that inbox while still sending from pitchnest.app.
+  // route replies into that inbox while sending through the configured transactional email provider.
   emailReplyTo: process.env.EMAIL_REPLY_TO || "ventureroom@gmail.com",
   // The public origin of the FRONTEND, used to build links inside outbound email.
   // A verification link or a trial reminder that points at localhost is a dead
@@ -292,7 +292,7 @@ export function resolvePlanPrice(plan: PaidPlan, term: BillingTerm): ResolvedPri
 // NODE_ENV and you get both the dev CORS policy AND a forgeable secret. The
 // secret being the public fallback is itself the danger, whatever the
 // environment claims to be. Local dev opts in via .env instead.
-const FALLBACK_JWT_SECRET = "pitchnest-dev-secret-change-in-production";
+const FALLBACK_JWT_SECRET = "ventureroom-dev-secret-change-in-production";
 if (config.jwtSecret === FALLBACK_JWT_SECRET) {
   const allowInsecure = process.env.ALLOW_INSECURE_JWT_SECRET === "true";
   if (!allowInsecure) {
