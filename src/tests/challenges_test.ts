@@ -270,7 +270,7 @@ assert.equal(
 
 // ─── Public projection ───────────────────────────────────────────────────────
 const publicView = toPublicChallenge(
-  { ...challengeRow, id: "11111111-1111-4111-8111-111111111111", slug: "pitchnest-challenge", title: "VentureRoom Challenge", organizer: "VentureRoom", tagline: "Practice. Pitch. Showcase. Win!", description: "D", status: "open", created_by: 5, confirmations: { prizes: { by: 5 } }, discount_code_id: "c1", banner_file: null },
+  { ...challengeRow, id: "11111111-1111-4111-8111-111111111111", slug: "ventureroom-challenge", title: "VentureRoom Challenge", organizer: "VentureRoom", tagline: "Practice. Pitch. Showcase. Win!", description: "D", status: "open", created_by: 5, confirmations: { prizes: { by: 5 } }, discount_code_id: "c1", banner_file: null },
   { discount: code, participantCount: 3, results: null, now: NOW },
 );
 for (const key of ["confirmations", "created_by", "updated_by", "discount_code_id", "status", "promo_enabled"]) {
@@ -284,7 +284,7 @@ assert.equal(publicView.results, null);
 // ─── Notifications ───────────────────────────────────────────────────────────
 const note = toNotificationView({
   notification_id: "n1", type: "challenge_correction", created_at: "2026-11-10T00:00:00Z", read_at: null,
-  challenge_title: "VentureRoom Challenge", challenge_slug: "pitchnest-challenge", excerpt: "Add your Discover link.",
+  challenge_title: "VentureRoom Challenge", challenge_slug: "ventureroom-challenge", excerpt: "Add your Discover link.",
 });
 assert.deepEqual(note, {
   id: "n1",
@@ -296,7 +296,7 @@ assert.deepEqual(note, {
   read: false,
 });
 assert.equal(
-  toNotificationView({ notification_id: "n2", type: "challenge_results", challenge_slug: "pitchnest-challenge", challenge_title: "VentureRoom Challenge" })?.link,
+  toNotificationView({ notification_id: "n2", type: "challenge_results", challenge_slug: "ventureroom-challenge", challenge_title: "VentureRoom Challenge" })?.link,
   "/opportunities/challenges/pitchnest-challenge#results",
 );
 assert.equal(toNotificationView({ notification_id: "n3", type: "challenge_joined" }), null, "no slug, no link, no row");
