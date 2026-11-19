@@ -109,7 +109,7 @@ export async function ensureProviderPlan(price: ResolvedPrice): Promise<number> 
     // one names its currency so it stands out in the dashboard.
     const local = price.currency === config.proPlanCurrency ? "" : `, ${price.currency}`;
     providerPlanId = await createProviderPaymentPlan({
-      name: `PitchNest ${PLAN_NAMES[plan]} (${term === "annual" ? "yearly" : "monthly"}${local})`,
+      name: `VentureRoom ${PLAN_NAMES[plan]} (${term === "annual" ? "yearly" : "monthly"}${local})`,
       amount: price.amount,
       currency: price.currency,
       interval: term === "annual" ? "yearly" : "monthly",
