@@ -54,5 +54,12 @@ const stable = diagnoseBusinessHealth([{
 }]);
 assert.equal(stable.status, "stable");
 assert.equal(diagnoseBusinessHealth([]).status, "insufficient_data");
+const currencyChange = diagnoseBusinessHealth([
+  { period_start: "2026-09-01", currency: "NGN", revenue: 500000, direct_costs: 100000, operating_expenses: 100000, cash_balance: 1000000, marketing_spend: 0, new_customers: 10, active_customers: 100, lost_customers: 1 },
+  { period_start: "2026-10-01", currency: "USD", revenue: 100, direct_costs: 10, operating_expenses: 10, cash_balance: 1000, marketing_spend: 0, new_customers: 10, active_customers: 100, lost_customers: 1 },
+]);
+assert.equal(currencyChange.issues.some(issue => issue.title === "Revenue has dropped materially"), false,
+  "revenue trends are not compared across different currencies");
+
 
 console.log("Business health validation and diagnostic tests passed.");
