@@ -118,7 +118,7 @@ export async function loadPublicResults(row: any): Promise<PublicResult[] | null
       return {
         place: winner.placement,
         prize: prizes.find((p) => p.place === winner.placement)?.amount ?? 0,
-        businessName: String((live ? snapshot?.name : null) ?? business?.name ?? "A PitchNest founder"),
+        businessName: String((live ? snapshot?.name : null) ?? business?.name ?? "A VentureRoom founder"),
         businessSlug: live ? String(business.slug) : null,
         founderName: winner.public_name_consent === true ? String(nameById.get(winner.user_id) ?? "") || null : null,
       };
@@ -691,7 +691,7 @@ export function evidenceObjectPath(participantId: string, file: string): string 
  * PUT /api/challenges/:slug/entry/evidence — an optional screenshot of the
  * post. Re-encoded (metadata stripped) and kept in the PRIVATE bucket; only
  * reviewers see it, through a short-lived signed link. The score itself always
- * comes from PitchNest's records, never from this image.
+ * comes from VentureRoom's records, never from this image.
  */
 export async function uploadChallengeEvidence(req: Request, res: Response) {
   if (!req.file?.buffer?.length) return res.status(400).json({ error: "Choose an image to upload." });

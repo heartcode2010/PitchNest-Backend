@@ -324,7 +324,7 @@ try {
   const nairaPlan = calls.find((c) => c.path === "/payment-plans")!;
   assert.deepEqual(
     { name: nairaPlan.body.name, amount: nairaPlan.body.amount, currency: nairaPlan.body.currency, interval: nairaPlan.body.interval },
-    { name: "PitchNest Pro Founder (monthly, NGN)", amount: proNaira, currency: "NGN", interval: "monthly" },
+    { name: "VentureRoom Pro Founder (monthly, NGN)", amount: proNaira, currency: "NGN", interval: "monthly" },
   );
   const nairaCheckout = calls.find((c) => c.path === "/payments")!;
   assert.deepEqual(
@@ -347,7 +347,7 @@ try {
   const dollarPlan = calls.find((c) => c.path === "/payment-plans")!;
   assert.deepEqual(
     { name: dollarPlan.body.name, amount: dollarPlan.body.amount, currency: dollarPlan.body.currency },
-    { name: "PitchNest Pro Founder (monthly)", amount: proMonthly.amount, currency: "USD" },
+    { name: "VentureRoom Pro Founder (monthly)", amount: proMonthly.amount, currency: "USD" },
     "no currency means dollars, on a plan of its own",
   );
 

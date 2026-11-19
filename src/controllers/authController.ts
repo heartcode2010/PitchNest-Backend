@@ -976,12 +976,12 @@ async function sendPasswordResetEmail(cleanEmail: string): Promise<void> {
         from: config.emailFrom,
         replyTo: config.emailReplyTo,
         to: user.email,
-        subject: "Reset your PitchNest password",
+        subject: "Reset your VentureRoom password",
         html: `
       <div style="font-family:sans-serif;max-width:480px;margin:auto;padding:32px">
         <h2 style="color:#1a1a2e">Reset your password</h2>
         <p style="color:#6b7280">
-          We received a request to reset your PitchNest password. Click the
+          We received a request to reset your VentureRoom password. Click the
           button below to choose a new one.
         </p>
         <a href="${resetLink}"

@@ -471,7 +471,7 @@ export const downloadDeckAuditPDF = async (req: Request, res: Response) => {
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename="PitchNest_DeckCheck_${safeName}.pdf"`,
+      `attachment; filename="VentureRoom_DeckCheck_${safeName}.pdf"`,
     );
     res.send(pdfBuffer);
   } catch (err) {

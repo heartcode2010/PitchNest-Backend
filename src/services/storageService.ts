@@ -112,7 +112,7 @@ export const businessImageUpload = makeUpload(
 // the process, so recordings spool to an OS temp directory and are streamed to
 // object storage by the controller. Random server-side names also ensure that
 // no client filename can influence a temporary filesystem path.
-export const recordingTempDir = path.join(os.tmpdir(), "pitchnest-recordings");
+export const recordingTempDir = path.join(os.tmpdir(), "ventureroom-recordings");
 fs.mkdirSync(recordingTempDir, { recursive: true });
 
 const recordingDiskStorage = multer.diskStorage({

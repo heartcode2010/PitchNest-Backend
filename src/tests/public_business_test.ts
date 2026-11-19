@@ -99,7 +99,7 @@ assert.equal("evaluationReport" in profile, false);
 const htmlTemplate = `<!doctype html><html><head>
   <meta name="description" content="default" />
   <meta property="og:title" content="default" />
-  <title>PitchNest</title>
+  <title>VentureRoom</title>
 </head><body><div id="root"></div></body></html>`;
 const profileHtml = injectPublicBusinessMetadata(
   htmlTemplate,
@@ -318,11 +318,11 @@ const shareDocument = renderPublicBusinessShareDocument(
   "https://site.example",
   "market-bridge",
 );
-assert.match(shareDocument, /<meta property="og:title" content="Market &lt;Bridge&gt; has launched on PitchNest Discover" \/>/);
-assert.match(shareDocument, /<meta name="twitter:title" content="Market &lt;Bridge&gt; has launched on PitchNest Discover" \/>/);
+assert.match(shareDocument, /<meta property="og:title" content="Market &lt;Bridge&gt; has launched on VentureRoom Discover" \/>/);
+assert.match(shareDocument, /<meta name="twitter:title" content="Market &lt;Bridge&gt; has launched on VentureRoom Discover" \/>/);
 // The preview text is the founder's description, not the tagline.
 assert.match(shareDocument, /<meta property="og:description" content="A public approved description\." \/>/);
-assert.match(shareDocument, /<title>Market &lt;Bridge&gt; — PitchNest<\/title>/);
+assert.match(shareDocument, /<title>Market &lt;Bridge&gt; — VentureRoom<\/title>/);
 assert.match(shareDocument, /href="https:\/\/site\.example\/businesses\/market-bridge"/);
 assert.doesNotMatch(shareDocument, /<Bridge>/);
 // An example profile is never announced as a launch.
@@ -331,7 +331,7 @@ const exampleShareDocument = renderPublicBusinessShareDocument(
   "https://site.example",
   "market-bridge",
 );
-assert.match(exampleShareDocument, /property="og:title" content="Example business: Market Bridge — PitchNest Discover"/);
+assert.match(exampleShareDocument, /property="og:title" content="Example business: Market Bridge — VentureRoom Discover"/);
 assert.doesNotMatch(exampleShareDocument, /has launched/);
 // Without a description, the tagline still gives the preview its text.
 const taglineShareDocument = renderPublicBusinessShareDocument(

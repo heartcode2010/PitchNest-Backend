@@ -97,7 +97,7 @@ interface Conn {
 
 function connect(token: string): Promise<Conn> {
   return new Promise((resolve, reject) => {
-    const ws = new WebSocket(`ws://127.0.0.1:${port}/`, ["pitchnest-v1", `pitchnest-auth.${token}`]);
+    const ws = new WebSocket(`ws://127.0.0.1:${port}/`, ["ventureroom-v1", `ventureroom-auth.${token}`]);
     const messages: any[] = [];
     const closed = new Promise<number>((r) => ws.on("close", (code) => r(code)));
     ws.on("message", (raw) => {

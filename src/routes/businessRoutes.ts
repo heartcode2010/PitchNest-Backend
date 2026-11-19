@@ -37,6 +37,7 @@ import {
   withdrawPitch,
 } from "../controllers/pitchController.ts";
 import rateLimit from "express-rate-limit";
+import { getBusinessHealth, saveBusinessHealth } from "../controllers/businessHealthController.ts";
 
 // Posting updates notifies followers, so cap it per user.
 const updateLimiter = rateLimit({
@@ -83,6 +84,10 @@ const editingRoles = requireBusinessRole("owner", "admin", "editor");
 const publishingRoles = requireBusinessRole("owner", "admin");
 
 router.get("/:id", requireBusinessMembership, allMemberRoles, getBusiness);
+// Financial snapshots are private business data: all active members can read;
+// only owners and admins can create or replace a monthly record.
+router.get("/:id/health", requireBusinessMembership, allMemberRoles, getBusinessHealth);
+router.put("/:id/health", requireBusinessMembership, publishingRoles, saveBusinessHealth);
 router.patch("/:id", requireBusinessMembership, editingRoles, updateBusiness);
 router.delete("/:id", requireBusinessMembership, requireBusinessRole("owner"), archiveBusiness);
 router.get("/:id/members", requireBusinessMembership, allMemberRoles, listBusinessMembers);

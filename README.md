@@ -104,8 +104,8 @@ VentureRoom-API/
 
 ```bash
 # Clone the repository
-git clone https://github.com/heartcode2010/PitchNest-Backend.git
-cd PitchNest-Backend
+git clone https://github.com/heartcode2010/VentureRoom-Backend.git
+cd VentureRoom-Backend
 
 # Install dependencies
 npm install
@@ -187,7 +187,7 @@ npm test
 
 | Repository | Description |
 | :--- | :--- |
-| **[VentureRoom-Frontend](https://github.com/heartcode2010/PitchNest-Frontend)** | React 19 + Vite 6 web single-page application |
+| **[VentureRoom-Frontend](https://github.com/heartcode2010/VentureRoom-Frontend)** | React 19 + Vite 6 web single-page application |
 | 
 
 ---

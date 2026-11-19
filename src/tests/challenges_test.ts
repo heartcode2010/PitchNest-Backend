@@ -86,9 +86,9 @@ ok("x", "https://twitter.com/founder/status/1855012345678901234/photo/1");
 ok("facebook", "https://www.facebook.com/founder.page/posts/pfbid02abc123");
 ok("facebook", "https://www.facebook.com/permalink.php?story_fbid=123456&id=789");
 ok("facebook", "https://www.facebook.com/share/p/1AbCdEf/");
-assert.match(refused("instagram", "https://www.instagram.com/pitchnestapp/"), /post itself/, "a profile is not a post");
-assert.match(refused("x", "https://x.com/pitchnestapp"), /post itself/);
-assert.match(refused("facebook", "https://www.facebook.com/pitchnestapp"), /post itself/);
+assert.match(refused("instagram", "https://www.instagram.com/ventureroom/"), /post itself/, "a profile is not a post");
+assert.match(refused("x", "https://x.com/ventureroom"), /post itself/);
+assert.match(refused("facebook", "https://www.facebook.com/ventureroom"), /post itself/);
 assert.match(refused("instagram", "https://x.com/someone/status/1855012345678901234"), /isn't a Instagram link|isn't a/, "the link must match the platform chosen");
 refused("instagram", "http://www.instagram.com/p/C1a2B3c4D5e/");
 refused("instagram", "https://user:pass@www.instagram.com/p/C1a2B3c4D5e/");
@@ -99,11 +99,11 @@ refused("x", 42);
 
 assert.deepEqual(
   readSocialHandles({
-    instagram: { handle: "@pitchnestapp", url: "https://instagram.com/pitchnestapp" },
-    x: { handle: "@pitchnestapp", url: "https://evil.example/pitchnestapp" },
+    instagram: { handle: "@ventureroom", url: "https://instagram.com/ventureroom" },
+    x: { handle: "@ventureroom", url: "https://evil.example/ventureroom" },
     tiktok: { handle: "@x", url: "https://tiktok.com/@x" },
   }),
-  { instagram: { handle: "@pitchnestapp", url: "https://instagram.com/pitchnestapp" } },
+  { instagram: { handle: "@ventureroom", url: "https://instagram.com/ventureroom" } },
   "only known platforms with their own https links survive",
 );
 
@@ -141,7 +141,7 @@ const challengeRow: any = {
   prizes: [{ place: 1, amount: 100000 }, { place: 2, amount: 60000 }, { place: 3, amount: 40000 }],
   ...window,
   winners_announced_on: "2026-11-21",
-  social_handles: { instagram: { handle: "@pitchnestapp", url: "https://instagram.com/pitchnestapp" } },
+  social_handles: { instagram: { handle: "@ventureroom", url: "https://instagram.com/ventureroom" } },
   judging_criteria: "Pitch 60%, profile 40%.",
   pitch_weight: 60,
   eligible_session_modes: ["solo", "panel"],
@@ -183,8 +183,8 @@ assert.equal(
 
 // ─── Admin input ─────────────────────────────────────────────────────────────
 const validChallenge = validateChallengeInput({
-  title: "PitchNest Challenge",
-  organizer: "PitchNest",
+  title: "VentureRoom Challenge",
+  organizer: "VentureRoom",
   tagline: "Practice. Pitch. Showcase. Win!",
   description: "A pitch competition for founders.",
   prizeCurrency: "ngn",
@@ -194,7 +194,7 @@ const validChallenge = validateChallengeInput({
   winnersAnnouncedOn: "2026-11-21",
   pitchWeight: 60,
   eligibleSessionModes: ["solo", "panel"],
-  socialHandles: { instagram: { handle: "@pitchnestapp", url: "https://instagram.com/pitchnestapp" } },
+  socialHandles: { instagram: { handle: "@ventureroom", url: "https://instagram.com/ventureroom" } },
   status: "open",
   confirmations: { prizes: { hash: "forged" } },
   createdBy: 999,
@@ -214,7 +214,7 @@ assert.ok(validateChallengeInput({ socialHandles: { x: { handle: "@pn", url: "ht
 assert.ok(validateChallengeInput({ eligibleSessionModes: ["panel", "karaoke"] }, { partial: true }).errors.length);
 assert.ok(validateChallengeInput({ pitchWeight: 101 }, { partial: true }).errors.length);
 assert.equal(validateChallengeInput({ requiredPlan: "none" }, { partial: true }).values.required_plan, null);
-assert.equal(slugifyChallengeTitle("PitchNest Challenge — Cohort 2!"), "pitchnest-challenge-cohort-2");
+assert.equal(slugifyChallengeTitle("VentureRoom Challenge — Cohort 2!"), "ventureroom-challenge-cohort-2");
 
 // ─── Discount maths and rules ────────────────────────────────────────────────
 assert.equal(normalizeDiscountCode(" pchu01 "), "PCHU01");
@@ -257,10 +257,10 @@ assert.deepEqual(
 );
 assert.ok(submissionBlockers({ ...ready, bestScore: null, completedSessions: 0 }).some((b) => b.includes("session")));
 assert.ok(submissionBlockers({ ...ready, business: { ...business, eligible: false, missingRequired: ["Problem"] } }).some((b) => b.includes("Acme")));
-const checklist = entryChecklist({ ...ready, hasPublishedBusiness: true, status: "needs_correction", submittedAt: "2026-11-10T00:00:00Z", reviewNote: "Tag @pitchnestapp." });
+const checklist = entryChecklist({ ...ready, hasPublishedBusiness: true, status: "needs_correction", submittedAt: "2026-11-10T00:00:00Z", reviewNote: "Tag @ventureroom." });
 assert.equal(checklist.length, 9, "every requirement from the brief is a row");
 assert.equal(checklist.find((c) => c.key === "socialReview")?.status, "needs_correction");
-assert.equal(checklist.find((c) => c.key === "socialReview")?.detail, "Tag @pitchnestapp.");
+assert.equal(checklist.find((c) => c.key === "socialReview")?.detail, "Tag @ventureroom.");
 assert.equal(checklist.find((c) => c.key === "subscription")?.status, "completed");
 assert.equal(
   entryChecklist({ ...ready, subscription: "pending", hasPublishedBusiness: true, status: "in_progress", submittedAt: null })
@@ -270,7 +270,7 @@ assert.equal(
 
 // ─── Public projection ───────────────────────────────────────────────────────
 const publicView = toPublicChallenge(
-  { ...challengeRow, id: "11111111-1111-4111-8111-111111111111", slug: "pitchnest-challenge", title: "PitchNest Challenge", organizer: "PitchNest", tagline: "Practice. Pitch. Showcase. Win!", description: "D", status: "open", created_by: 5, confirmations: { prizes: { by: 5 } }, discount_code_id: "c1", banner_file: null },
+  { ...challengeRow, id: "11111111-1111-4111-8111-111111111111", slug: "ventureroom-challenge", title: "VentureRoom Challenge", organizer: "VentureRoom", tagline: "Practice. Pitch. Showcase. Win!", description: "D", status: "open", created_by: 5, confirmations: { prizes: { by: 5 } }, discount_code_id: "c1", banner_file: null },
   { discount: code, participantCount: 3, results: null, now: NOW },
 );
 for (const key of ["confirmations", "created_by", "updated_by", "discount_code_id", "status", "promo_enabled"]) {
@@ -284,20 +284,20 @@ assert.equal(publicView.results, null);
 // ─── Notifications ───────────────────────────────────────────────────────────
 const note = toNotificationView({
   notification_id: "n1", type: "challenge_correction", created_at: "2026-11-10T00:00:00Z", read_at: null,
-  challenge_title: "PitchNest Challenge", challenge_slug: "pitchnest-challenge", excerpt: "Add your Discover link.",
+  challenge_title: "VentureRoom Challenge", challenge_slug: "ventureroom-challenge", excerpt: "Add your Discover link.",
 });
 assert.deepEqual(note, {
   id: "n1",
   type: "challenge_correction",
-  title: "Your PitchNest Challenge entry needs a correction",
+  title: "Your VentureRoom Challenge entry needs a correction",
   excerpt: "Add your Discover link.",
-  link: "/opportunities/challenges/pitchnest-challenge#my-entry",
+  link: "/opportunities/challenges/ventureroom-challenge#my-entry",
   createdAt: "2026-11-10T00:00:00.000Z",
   read: false,
 });
 assert.equal(
-  toNotificationView({ notification_id: "n2", type: "challenge_results", challenge_slug: "pitchnest-challenge", challenge_title: "PitchNest Challenge" })?.link,
-  "/opportunities/challenges/pitchnest-challenge#results",
+  toNotificationView({ notification_id: "n2", type: "challenge_results", challenge_slug: "ventureroom-challenge", challenge_title: "VentureRoom Challenge" })?.link,
+  "/opportunities/challenges/ventureroom-challenge#results",
 );
 assert.equal(toNotificationView({ notification_id: "n3", type: "challenge_joined" }), null, "no slug, no link, no row");
 
@@ -316,27 +316,27 @@ assert.match(migration, /INSERT INTO schema_migrations[\s\S]*'0038'/);
 assert.doesNotMatch(migration, /evaluation_report\s*->\s*'transcript'/, "scores only; transcripts are never read");
 
 // ─── Link previews: title, tagline and opening sentences, escaped ────────────
-const longDescription = `The PitchNest Challenge gives startup founders an opportunity to strengthen their pitching skills, showcase their businesses, and compete for cash prizes.\n\nPractice with AI investors, improve your pitch readiness score, publish your business on PitchNest Discover, and share your progress.`;
-const shareText = challengeShareDescription({ title: "PitchNest Challenge", tagline: "Practice. Pitch. Showcase. Win!", description: longDescription });
+const longDescription = `The VentureRoom Challenge gives startup founders an opportunity to strengthen their pitching skills, showcase their businesses, and compete for cash prizes.\n\nPractice with AI investors, improve your pitch readiness score, publish your business on VentureRoom Discover, and share your progress.`;
+const shareText = challengeShareDescription({ title: "VentureRoom Challenge", tagline: "Practice. Pitch. Showcase. Win!", description: longDescription });
 assert.equal(
   shareText,
-  "Practice. Pitch. Showcase. Win! The PitchNest Challenge gives startup founders an opportunity to strengthen their pitching skills, showcase their businesses, and compete for cash prizes.",
+  "Practice. Pitch. Showcase. Win! The VentureRoom Challenge gives startup founders an opportunity to strengthen their pitching skills, showcase their businesses, and compete for cash prizes.",
   "the tagline, then whole sentences that fit",
 );
 assert.ok(shareText.length <= 200);
-assert.equal(challengeShareDescription({ title: "Demo Day", tagline: "", description: "" }), "Demo Day: a pitch competition hosted by PitchNest.");
+assert.equal(challengeShareDescription({ title: "Demo Day", tagline: "", description: "" }), "Demo Day: a pitch competition hosted by VentureRoom.");
 const hostile = renderChallengeShareDocument(
   { slug: "demo", title: `"><script>alert(1)</script>`, tagline: "Win & <b>grow</b>", description: "", imageUrl: "https://cdn.example/card.jpg?a=1&b=2" },
-  "https://www.pitchnest.app",
+  "https://ventureroom.vercel.app",
   "demo",
 );
 assert.doesNotMatch(hostile, /<script>|<b>/, "staff text is escaped");
 assert.match(hostile, /<meta property="og:title" content="&quot;&gt;&lt;script&gt;alert\(1\)&lt;\/script&gt;" \/>/);
 assert.match(hostile, /<meta property="og:image" content="https:\/\/cdn\.example\/card\.jpg\?a=1&amp;b=2" \/>/);
-assert.match(hostile, /<meta property="og:url" content="https:\/\/www\.pitchnest\.app\/opportunities\/challenges\/demo" \/>/);
-const missing = renderChallengeShareDocument(null, "https://www.pitchnest.app", "unavailable");
-assert.match(missing, /<meta property="og:image" content="https:\/\/www\.pitchnest\.app\/og-image\.png" \/>/, "the site image when there is nothing to show");
-assert.match(missing, /<title>Challenge not found — PitchNest<\/title>/);
+assert.match(hostile, /<meta property="og:url" content="https:\/\/ventureroom\.vercel\.app\/opportunities\/challenges\/demo" \/>/);
+const missing = renderChallengeShareDocument(null, "https://ventureroom.vercel.app", "unavailable");
+assert.match(missing, /<meta property="og:image" content="https:\/\/ventureroom\.vercel\.app\/og-image\.png" \/>/, "the site image when there is nothing to show");
+assert.match(missing, /<title>Challenge not found — VentureRoom<\/title>/);
 
 console.log("Challenge tests passed.");
 process.exit(0);

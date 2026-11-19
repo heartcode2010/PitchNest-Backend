@@ -119,7 +119,7 @@ assert.equal(JSON.stringify(summary).includes("must-not-leak"), false);
 assert.equal(toThreadSummary(summaryRow, 42).viewerIsAuthor, true);
 assert.equal(toThreadSummary({ ...summaryRow, topic: "nonsense" }, null).topic, "general");
 assert.equal(toThreadDetail({ ...summaryRow, body: "Full", author_avatar_url: "javascript:x" }, null).author.avatarUrl, null);
-assert.equal(toReply({ reply_id: REPLY_ID, body: "Hi", created_at: "bad", author_id: 7, author_name: null }, 7).author.name, "PitchNest member");
+assert.equal(toReply({ reply_id: REPLY_ID, body: "Hi", created_at: "bad", author_id: 7, author_name: null }, 7).author.name, "VentureRoom member");
 
 const cursor = { at: "2026-10-15T10:00:00.000Z", id: THREAD_ID };
 assert.deepEqual(decodeCursor(encodeCursor(cursor)), cursor);

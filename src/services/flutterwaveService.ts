@@ -197,9 +197,9 @@ export async function createCheckout(
           name: user.name || undefined,
         },
         customizations: {
-          title: `PitchNest ${planLabel}`,
+          title: `VentureRoom ${planLabel}`,
           description:
-            `PitchNest ${planLabel}, ${billingMode === "auto_renew" ? `renews every ${termLabel} until you cancel` : "one-time payment; renew manually"}` +
+            `VentureRoom ${planLabel}, ${billingMode === "auto_renew" ? `renews every ${termLabel} until you cancel` : "one-time payment; renew manually"}` +
             (discount ? `, ${discount.percentOff}% off with ${discount.code}` : "") +
             (subscription.bonusDays > 0 ? ". Your free month is added on top." : "."),
         },

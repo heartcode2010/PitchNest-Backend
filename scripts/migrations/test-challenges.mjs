@@ -1,5 +1,5 @@
-// Proves migrations 0037 (no trial for new accounts), 0038 (hosted challenges)
-// and 0039 (Founder plan for the challenge) against real
+// Proves migrations 0037-0039 (trial and hosted challenge), 0040 (business health)
+// and 0041 (VentureRoom challenge rebrand) against real
 // Postgres (PGlite), on top of 0000 + 0015-0036.
 // usage: node scripts/migrations/test-challenges.mjs [backend dir]
 import fs from "node:fs";
@@ -13,6 +13,8 @@ const fileFor = (v) => fs.readdirSync(migDir).find((f) => f.startsWith(`${v}_`) 
 const VERSIONS = Array.from({ length: 24 }, (_, i) => String(15 + i).padStart(4, "0"));
 const CHALLENGE_SQL = readSql(path.join(migDir, fileFor("0038")));
 const FOUNDER_CHALLENGE_SQL = readSql(path.join(migDir, fileFor("0039")));
+const BUSINESS_HEALTH_SQL = readSql(path.join(migDir, fileFor("0040")));
+const VENTUREROOM_REBRAND_SQL = readSql(path.join(migDir, fileFor("0041")));
 
 let failures = 0;
 const check = (name, ok, detail = "") => {
@@ -107,6 +109,37 @@ await db.exec(`
   UPDATE challenges SET promo_enabled = FALSE WHERE id = '${challengeId}';
   UPDATE discount_codes SET active = FALSE, max_redemptions = NULL WHERE id = '${codeId}';
 `);
+
+// ── 0040: business health records ──────────────────────────────────────────
+await run(db, "0040", BUSINESS_HEALTH_SQL);
+const healthTable = await one(db, `
+  SELECT 1 AS ok FROM information_schema.tables
+   WHERE table_schema = 'public' AND table_name = 'business_health_snapshots'`);
+check("0040 creates monthly business health snapshots", !!healthTable);
+check("ledger records 0040", !!(await one(db, `SELECT 1 AS ok FROM schema_migrations WHERE version = '0040'`)));
+
+// ── 0041: rename the hosted challenge without detaching entries ────────────
+await run(db, "0041", VENTUREROOM_REBRAND_SQL);
+const rebranded = await one(db, `
+  SELECT c.slug, c.title, c.organizer, c.website_url, c.social_handles, c.terms,
+         d.description, d.code
+    FROM challenges c JOIN discount_codes d ON d.id = c.discount_code_id
+   WHERE c.id = '${challengeId}'`);
+check("0041 changes the hosted challenge name, slug and website",
+  rebranded?.slug === "ventureroom-challenge" && rebranded?.title === "VentureRoom Challenge" &&
+    rebranded?.organizer === "VentureRoom" && rebranded?.website_url === "https://ventureroom.vercel.app");
+check("0041 removes unverified social handles and updates challenge terms",
+  JSON.stringify(rebranded?.social_handles) === "{}" && rebranded?.terms?.includes("VentureRoom") &&
+    !rebranded?.terms?.includes("PitchNest"));
+check("0041 updates the existing discount label without changing its code",
+  rebranded?.description?.includes("VentureRoom Challenge") && rebranded?.code === "PCHU01");
+check("ledger records 0041", !!(await one(db, `SELECT 1 AS ok FROM schema_migrations WHERE version = '0041'`)));
+const rebrandSnap = await snapshot(db);
+await run(db, "0040 (second run)", BUSINESS_HEALTH_SQL);
+await run(db, "0041 (second run)", VENTUREROOM_REBRAND_SQL);
+const rebrandAgain = diff(rebrandSnap, await snapshot(db));
+check("a second run of 0040 and 0041 changes nothing", rebrandAgain.onlyA.length === 0 && rebrandAgain.onlyB.length === 0,
+  `${rebrandAgain.onlyA.length + rebrandAgain.onlyB.length} differences`);
 
 // ── Accounts, businesses, entries ──────────────────────────────────────────
 await db.exec(`
@@ -325,7 +358,7 @@ check("challenge notifications are hidden while the challenge is a draft",
 await db.exec(`UPDATE challenges SET status = 'open' WHERE id = '${challengeId}'`);
 const listed = await rows(db, `SELECT type, challenge_title, challenge_slug FROM list_user_notifications(1, 20)`);
 check("challenge notifications list with the challenge title and slug",
-  listed.length === 1 && listed[0].challenge_title === "PitchNest Challenge" && listed[0].challenge_slug === "pitchnest-challenge");
+  listed.length === 1 && listed[0].challenge_title === "VentureRoom Challenge" && listed[0].challenge_slug === "ventureroom-challenge");
 await db.exec(`UPDATE challenge_participants SET status = 'needs_correction', review_note = 'Add your Discover link to the caption.' WHERE id = '${p4}'`);
 await db.exec(`INSERT INTO notifications (user_id, type, entity_id) VALUES (4, 'challenge_correction', '${challengeId}')`);
 const correction = await one(db, `SELECT excerpt FROM list_user_notifications(4, 20)`);

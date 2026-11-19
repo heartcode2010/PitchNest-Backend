@@ -58,14 +58,14 @@ export function renderPublicBusinessShareDocument(
   requestedSlug: string,
 ): string {
   const canonical = `${origin}/businesses/${encodeURIComponent(requestedSlug)}`;
-  const label = business ? `View ${business.name} on PitchNest` : "Explore businesses on PitchNest";
+  const label = business ? `View ${business.name} on VentureRoom` : "Explore businesses on VentureRoom";
   const href = business ? canonical : `${origin}/discover`;
   const template = [
     "<!doctype html>",
     '<html lang="en"><head>',
     '<meta charset="utf-8" />',
     '<meta name="viewport" content="width=device-width, initial-scale=1" />',
-    "<title>PitchNest</title>",
+    "<title>VentureRoom</title>",
     "</head><body>",
     `<p><a href="${escapeHtml(href)}">${escapeHtml(label)}</a></p>`,
     "</body></html>",
@@ -85,17 +85,17 @@ export function injectPublicBusinessMetadata(
   requestedSlug: string,
 ): string {
   const canonical = `${origin}/businesses/${encodeURIComponent(requestedSlug)}`;
-  const title = business ? `${business.name} — PitchNest` : "Business not found — PitchNest";
+  const title = business ? `${business.name} — VentureRoom` : "Business not found — VentureRoom";
   // The link-preview heading. Example profiles are illustrations, never launches.
   const shareTitle = !business
     ? title
     : business.isExample
-      ? `Example business: ${business.name} — PitchNest Discover`
-      : `${business.name} has launched on PitchNest Discover`;
+      ? `Example business: ${business.name} — VentureRoom Discover`
+      : `${business.name} has launched on VentureRoom Discover`;
   const description = business
     ? leadSentences(business.description) ||
-      (business.tagline || `Explore ${business.name} on PitchNest.`).slice(0, 220)
-    : "This PitchNest business profile is not publicly available.";
+      (business.tagline || `Explore ${business.name} on VentureRoom.`).slice(0, 220)
+    : "This VentureRoom business profile is not publicly available.";
   // Example profiles are illustrations, not businesses to send searchers to.
   const robots = business && !business.isExample ? "index, follow" : "noindex, follow";
   // The business's own approved logo, then its cover, then the site image.

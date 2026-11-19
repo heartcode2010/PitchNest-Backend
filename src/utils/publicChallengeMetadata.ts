@@ -13,7 +13,7 @@ export interface ChallengeShare {
 export function challengeShareDescription(challenge: Pick<ChallengeShare, "title" | "tagline" | "description">): string {
   const tagline = challenge.tagline.replace(/\s+/g, " ").trim();
   const lead = leadSentences(challenge.description, Math.max(80, 200 - (tagline ? tagline.length + 1 : 0)));
-  return [tagline, lead].filter(Boolean).join(" ") || `${challenge.title}: a pitch competition hosted by PitchNest.`;
+  return [tagline, lead].filter(Boolean).join(" ") || `${challenge.title}: a pitch competition hosted by VentureRoom.`;
 }
 
 /**
@@ -31,11 +31,11 @@ export function renderChallengeShareDocument(
   requestedSlug: string,
 ): string {
   const canonical = `${origin}/opportunities/challenges/${encodeURIComponent(requestedSlug)}`;
-  const title = challenge ? `${challenge.title} — PitchNest` : "Challenge not found — PitchNest";
+  const title = challenge ? `${challenge.title} — VentureRoom` : "Challenge not found — VentureRoom";
   const shareTitle = challenge ? challenge.title : title;
   const description = challenge
     ? challengeShareDescription(challenge)
-    : "This PitchNest challenge is not publicly available.";
+    : "This VentureRoom challenge is not publicly available.";
   // The card and the site image are both 1200 × 630.
   const image = challenge?.imageUrl || `${origin}/og-image.png`;
   const template = [
@@ -43,15 +43,15 @@ export function renderChallengeShareDocument(
     '<html lang="en"><head>',
     '<meta charset="utf-8" />',
     '<meta name="viewport" content="width=device-width, initial-scale=1" />',
-    "<title>PitchNest</title>",
-    '<meta property="og:site_name" content="PitchNest" />',
+    "<title>VentureRoom</title>",
+    '<meta property="og:site_name" content="VentureRoom" />',
     '<meta property="og:image:width" content="1200" />',
     '<meta property="og:image:height" content="630" />',
-    `<meta property="og:image:alt" content="${escapeHtml(challenge?.imageUrl ? `${challenge.title} poster` : "PitchNest")}" />`,
+    `<meta property="og:image:alt" content="${escapeHtml(challenge?.imageUrl ? `${challenge.title} poster` : "VentureRoom")}" />`,
     "</head><body>",
     challenge
-      ? `<p><a href="${escapeHtml(canonical)}">${escapeHtml(`View the ${challenge.title} on PitchNest`)}</a></p>`
-      : `<p><a href="${escapeHtml(`${origin}/opportunities`)}">Explore opportunities on PitchNest</a></p>`,
+      ? `<p><a href="${escapeHtml(canonical)}">${escapeHtml(`View the ${challenge.title} on VentureRoom`)}</a></p>`
+      : `<p><a href="${escapeHtml(`${origin}/opportunities`)}">Explore opportunities on VentureRoom</a></p>`,
     "</body></html>",
   ].join("\n");
 
