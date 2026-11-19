@@ -5,7 +5,7 @@ import { cleanPublicText } from "../utils/publicText.ts";
 import { DISCOUNT_COLUMNS, type DiscountCodeRow } from "./discountService.ts";
 
 /**
- * Challenges PitchNest hosts itself (migration 0037): the rules, the founder's
+ * Challenges VentureRoom hosts itself (migration 0037): the rules, the founder's
  * entry and what is verified about it.
  *
  * TRUST. Nothing a founder sends is evidence of eligibility. The best score
@@ -180,7 +180,7 @@ function parsedHttpsUrl(raw: unknown): URL | null {
 
 /**
  * A public post URL on the platform the founder chose. Only the shape is
- * checked: PitchNest never fetches the link (no platform API, no crawling), so
+ * checked: VentureRoom never fetches the link (no platform API, no crawling), so
  * whether the post is public, tagged and captioned is verified by a reviewer.
  */
 export function validateSocialPostUrl(
@@ -549,7 +549,7 @@ export function shareCardFile(bannerFile: string): string {
   return bannerFile.replace(/\.webp$/, "-share.jpg");
 }
 
-// Cards for posters that ship with the website (PitchNest-Frontend/public),
+// Cards for posters that ship with the website (VentureRoom-Frontend/public),
 // shown until staff upload a poster. Mirrors challengePosterUrl there.
 const BUNDLED_SHARE_CARDS: Record<string, string> = {
   "pitchnest-challenge": "/pitchnest-challenge-share.jpg",
