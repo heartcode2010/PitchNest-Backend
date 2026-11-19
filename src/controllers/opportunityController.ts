@@ -18,7 +18,7 @@ import {
  * computed from the dates on every read, never stored.
  *
  * The public list also carries the challenges VentureRoom hosts itself
- * (migration 0038), first and marked source "pitchnest": they open a page on
+ * (migration 0038), first and marked source "ventureroom": they open a page on
  * VentureRoom instead of an organizer's site. External listings are marked
  * source "external" and otherwise unchanged.
  */
@@ -264,7 +264,7 @@ export async function listHostedChallengeOpportunities(
           closesOn,
           lastCheckedAt: isoOrNull(row.updated_at),
           ...timing,
-          source: "pitchnest" as const,
+          source: "ventureroom" as const,
           challenge: {
             slug: String(row.slug),
             tagline: String(row.tagline ?? ""),
