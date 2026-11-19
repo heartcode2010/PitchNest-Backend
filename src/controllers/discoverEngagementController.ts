@@ -117,7 +117,7 @@ export function toPublicComment(
     body: typeof row?.body === "string" ? row.body : "",
     createdAt: Number.isNaN(created.getTime()) ? "" : created.toISOString(),
     author: {
-      name: name || "PitchNest member",
+      name: name || "VentureRoom member",
       avatarUrl: safeAvatarUrl(row?.author_avatar_url),
       isBusinessMember: row?.author_is_member === true,
     },
