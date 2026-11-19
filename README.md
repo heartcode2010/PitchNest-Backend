@@ -141,7 +141,7 @@ AZURE_OPENAI_API_KEY=your-azure-key
 
 # Transactional Email (Resend)
 RESEND_API_KEY=re_your_api_key
-EMAIL_FROM=PitchNest <hello@pitchnest.app>
+EMAIL_FROM=VentureRoom <hello@pitchnest.app>
 
 # Billing (Flutterwave)
 FLW_SECRET_KEY=FLWSECK-your-key
