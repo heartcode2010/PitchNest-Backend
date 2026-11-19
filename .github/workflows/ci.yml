@@ -17,8 +17,26 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     env:
-      # Ephemeral test-only signing key; never used by deployed environments.
+      # Isolated placeholders only. Tests stub external providers and .invalid
+      # hosts prevent CI from reaching real services.
+      NODE_ENV: development
+      PORT: "3000"
       JWT_SECRET: venture-room-ci-only-not-for-production-2026
+      SUPABASE_URL: https://ci-placeholder.invalid
+      SUPABASE_SERVICE_ROLE_KEY: ci-placeholder
+      ALLOWED_ORIGIN: http://localhost:5174
+      CLIENT_URL: http://localhost:5174
+      APP_BASE_URL: http://localhost:5174
+      AZURE_OPENAI_ENDPOINT: https://ci-placeholder.invalid
+      AZURE_OPENAI_API_KEY: ci-placeholder
+      AZURE_OPENAI_API_VERSION: 2026-07-09
+      AZURE_OPENAI_DEPLOYMENT: gpt-5.6-luna
+      AZURE_SPEECH_KEY: ci-placeholder
+      AZURE_SPEECH_REGION: eastus
+      RESEND_API_KEY: re_ci_placeholder
+      GOOGLE_CLIENT_ID: ci-placeholder.apps.googleusercontent.com
+      TRIAL_JOBS_ENABLED: "false"
+      RESEARCH_ENABLED: "false"
     steps:
       - name: Check out source
         uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
