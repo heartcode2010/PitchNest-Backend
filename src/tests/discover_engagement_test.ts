@@ -128,7 +128,7 @@ assert.equal(JSON.stringify(anonymousView).includes("99"), false, "author id nev
 assert.equal(JSON.stringify(anonymousView).includes("must-not-leak"), false);
 assert.equal(toPublicComment(commentRow, { userId: 99, canModerate: false }).viewerCanRemove, true);
 assert.equal(toPublicComment(commentRow, { userId: 5, canModerate: true }).viewerCanRemove, true);
-assert.equal(toPublicComment({ ...commentRow, author_name: null }, { userId: null, canModerate: false }).author.name, "PitchNest member");
+assert.equal(toPublicComment({ ...commentRow, author_name: null }, { userId: null, canModerate: false }).author.name, "VentureRoom member");
 assert.equal(toPublicComment({ ...commentRow, created_at: "garbage" }, { userId: null, canModerate: false }).createdAt, "");
 
 const engagementRow = {
