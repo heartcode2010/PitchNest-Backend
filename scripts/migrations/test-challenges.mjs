@@ -358,7 +358,7 @@ check("challenge notifications are hidden while the challenge is a draft",
 await db.exec(`UPDATE challenges SET status = 'open' WHERE id = '${challengeId}'`);
 const listed = await rows(db, `SELECT type, challenge_title, challenge_slug FROM list_user_notifications(1, 20)`);
 check("challenge notifications list with the challenge title and slug",
-  listed.length === 1 && listed[0].challenge_title === "PitchNest Challenge" && listed[0].challenge_slug === "pitchnest-challenge");
+  listed.length === 1 && listed[0].challenge_title === "VentureRoom Challenge" && listed[0].challenge_slug === "ventureroom-challenge");
 await db.exec(`UPDATE challenge_participants SET status = 'needs_correction', review_note = 'Add your Discover link to the caption.' WHERE id = '${p4}'`);
 await db.exec(`INSERT INTO notifications (user_id, type, entity_id) VALUES (4, 'challenge_correction', '${challengeId}')`);
 const correction = await one(db, `SELECT excerpt FROM list_user_notifications(4, 20)`);
