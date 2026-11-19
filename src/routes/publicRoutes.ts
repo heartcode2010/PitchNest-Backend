@@ -87,7 +87,7 @@ const eventLimiter = rateLimit({
 });
 router.post("/events", eventLimiter, optionalUserAuth, recordClientEvent);
 // Staff-curated opportunities; read-only for everyone else. Includes the
-// challenges PitchNest hosts (migration 0038), marked source "pitchnest".
+// challenges VentureRoom hosts (migration 0038), marked source "pitchnest".
 router.get("/opportunities", discoverReadLimiter, listPublicOpportunities);
 // Hosted challenges: drafts are a 404; entries and private data never appear.
 router.get("/challenges/promo", discoverReadLimiter, getChallengePromo);
