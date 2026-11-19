@@ -17,9 +17,9 @@ import {
  * the public only reads published ones. Open / closing soon / closed is
  * computed from the dates on every read, never stored.
  *
- * The public list also carries the challenges PitchNest hosts itself
+ * The public list also carries the challenges VentureRoom hosts itself
  * (migration 0038), first and marked source "pitchnest": they open a page on
- * PitchNest instead of an organizer's site. External listings are marked
+ * VentureRoom instead of an organizer's site. External listings are marked
  * source "external" and otherwise unchanged.
  */
 
