@@ -133,7 +133,7 @@ const WRAP_UP_HARD_SEC = 20;
 // entire transcript.
 
 // ── Varied opening greetings ─────────────────────────────────────────────────
-// "Welcome to the Nest" (play on PitchNest). A fresh one is picked at random each
+// "Welcome to VentureRoom. A fresh one is picked at random each
 // session so the opening never feels canned. {b} is the business name.
 const PANEL_GREETINGS = [
   "Welcome to the Nest — whenever you're ready, walk us through {b}.",
@@ -695,7 +695,7 @@ export function initRestSocket(wss: WebSocketServer) {
 
     // ── JWT Authentication ──────────────────────────────────────────────────
     // Browser WebSockets cannot set Authorization. The client offers the token
-    // in Sec-WebSocket-Protocol while the server selects only `pitchnest-v1`,
+    // in Sec-WebSocket-Protocol while the server selects only `ventureroom-v1`,
     // keeping credentials out of URLs and access logs.
     let authenticatedUserId: number | null = null;
     let authenticatedAuthVersion = 0;
@@ -703,8 +703,8 @@ export function initRestSocket(wss: WebSocketServer) {
       const offeredProtocols = String(req.headers["sec-websocket-protocol"] || "")
         .split(",")
         .map((value) => value.trim());
-      const authProtocol = offeredProtocols.find((value) => value.startsWith("pitchnest-auth."));
-      const token = authProtocol?.slice("pitchnest-auth.".length) || "";
+      const authProtocol = offeredProtocols.find((value) => value.startsWith("ventureroom-auth."));
+      const token = authProtocol?.slice("ventureroom-auth.".length) || "";
       if (!token) {
         sendJson(ws, { type: "error", message: "Authentication required.", code: "AUTH_REQUIRED" });
         ws.close(4001, "Authentication required");
@@ -1114,7 +1114,7 @@ export function initRestSocket(wss: WebSocketServer) {
     };
 
     console.log(
-      "✅ Client connected to PitchNest Brain (Azure OpenAI + Azure TTS)",
+      "✅ Client connected to VentureRoom AI panel (Azure OpenAI + Azure TTS)",
     );
 
     if (!hasOpenAiConfig()) {
