@@ -128,7 +128,7 @@ export const listSessions = async (req: Request, res: Response) => {
  * links. It never worked (the route sits behind authMiddleware, so an anonymous
  * visitor got a 401 regardless), and once sharing became real it would have been
  * the wrong shape entirely: it returned the whole evaluation_report, transcript
- * and financials included, to any logged-in PitchNest user who came to hold a
+ * and financials included, to any logged-in VentureRoom user who came to hold a
  * share id. Public sharing now goes through GET /api/public/pitch/:shareId,
  * which returns a deliberately narrow projection, and this route is strictly the
  * owner's own view.
@@ -725,7 +725,7 @@ export const generateSessionPDF = async (req: Request, res: Response) => {
     res.setHeader("Content-Type", "application/pdf");
     res.setHeader(
       "Content-Disposition",
-      `attachment; filename="PitchNest_Report_${safeName}.pdf"`,
+      `attachment; filename="VentureRoom_Report_${safeName}.pdf"`,
     );
     res.setHeader("Content-Length", pdfBuffer.length);
     res.end(pdfBuffer);
