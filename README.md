@@ -22,7 +22,7 @@
 
 ## 🧠 Overview
 
-**VentureRoom Backend** powers the intelligent core of VentureRoom and works with the VentureRoom web application as one founder-readiness platform. It bridges real-time human voice input with multimodal artificial intelligence, orchestrating high-stakes venture capital pitch simulations with sub-second voice latency:
+**VentureRoom Backend** powers the secure application services, AI investor simulations, real-time voice sessions and founder data behind VentureRoom. It works with the VentureRoom web application as one founder-readiness platform.
 
 * **Audio Streaming Bridge**: Streams microphone PCM audio chunks over WebSockets to **Azure Speech SDK** for real-time transcription.
 * **Persona Intelligence Engine**: Dispatches transcripts to **Azure OpenAI / OpenAI** with customized personas (Marcus, Sarah, Chen, Riley) featuring conversational interjections and interruption handling.
@@ -71,7 +71,7 @@
 ## 🛠️ Project Structure
 
 ```text
-VentureRoom-Backend/
+PitchNest-Backend/
 ├── migrations/            # SQL migration history for Supabase Postgres
 ├── scripts/               # Test and audit utility scripts
 ├── src/
