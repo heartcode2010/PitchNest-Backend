@@ -71,7 +71,7 @@
 ## 🛠️ Project Structure
 
 ```text
-PitchNest-Backend/
+VentureRoom-API/
 ├── migrations/            # SQL migration history for Supabase Postgres
 ├── scripts/               # Test and audit utility scripts
 ├── src/
@@ -141,7 +141,7 @@ AZURE_OPENAI_API_KEY=your-azure-key
 
 # Transactional Email (Resend)
 RESEND_API_KEY=re_your_api_key
-EMAIL_FROM=VentureRoom <hello@pitchnest.app>
+EMAIL_FROM=VentureRoom <onboarding@resend.dev>
 
 # Billing (Flutterwave)
 FLW_SECRET_KEY=FLWSECK-your-key
@@ -187,7 +187,7 @@ npm test
 | Repository | Description |
 | :--- | :--- |
 | **[VentureRoom-Frontend](https://github.com/heartcode2010/PitchNest-Frontend)** | React 19 + Vite 6 web single-page application |
-| **[PitchNest-Mobile](https://github.com/PitchNest-Lab/PitchNest-Mobile)** | Native iOS & Android companion mobile app (React Native / Expo) |
+| 
 
 ---
 
