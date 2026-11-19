@@ -209,7 +209,7 @@ if (hasFrontendBuild) {
       <!DOCTYPE html>
       <html>
         <head>
-          <title>PitchNest Live API</title>
+          <title>VentureRoom Live API</title>
           <style>
             body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background: #0b0f19; color: #f3f4f6; display: flex; align-items: center; justify-content: center; height: 100vh; margin: 0; }
             .container { text-align: center; border: 1px solid #1e293b; background: #111827; padding: 2rem; border-radius: 12px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06); max-width: 400px; }
@@ -220,7 +220,7 @@ if (hasFrontendBuild) {
         </head>
         <body>
           <div class="container">
-            <h1>🚀 PitchNest Brain</h1>
+            <h1>🚀 VentureRoom Brain</h1>
             <p>The high-performance real-time Venture Capital pitch evaluator is online and listening.</p>
             <span class="badge">API ACTIVE</span>
           </div>
@@ -231,7 +231,7 @@ if (hasFrontendBuild) {
 
   // Fallback 404 for other non-API routes
   app.get("*", (req, res) => {
-    res.status(404).json({ error: "Not Found", message: "Use /api routes to connect to PitchNest Live API services." });
+    res.status(404).json({ error: "Not Found", message: "Use /api routes to connect to VentureRoom Live API services." });
   });
 }
 
