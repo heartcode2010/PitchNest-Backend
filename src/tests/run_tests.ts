@@ -63,7 +63,7 @@ assert(hashAuthToken("email-link", rawCredential) !== storedCredential, "Credent
 assert(isEmailCode("012345") && !isEmailCode("12345") && !isEmailCode("12345x"), "Email verification codes are shape-validated");
 assert(safeEqualText("same", "same") && !safeEqualText("same", "different"), "Credential comparison is exact and timing-safe");
 
-console.log("\n🧪 Running PitchNest Memory, Reasoning & Intelligence Test Suite...\n");
+console.log("\n🧪 Running VentureRoom Memory, Reasoning & Intelligence Test Suite...\n");
 
 // 1. Temporal Reasoning Test
 const text1 = "Our first paying customer signed on two weeks ago on a monthly plan.";
